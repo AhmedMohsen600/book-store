@@ -16,6 +16,5 @@ export const Inner = styled.ul`
 
 export const Line = styled.div`
   height: 3px;
-
   background-color: #f1f1f1;
 `;
