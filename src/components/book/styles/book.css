@@ -1,3 +1,31 @@
-div {
-  background-color: red;
+.book {
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #e8e8e8;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+span {
+  color: #898989;
+}
+
+.author {
+  color: #689ccb;
+}
+
+.title {
+  font-size: 23px;
+}
+
+.remove-btn {
+  padding: 16px;
+  cursor: pointer;
+  background: #0290ff;
+  border: 0;
+  color: #fff;
+  font-size: 16px;
+  align-self: flex-start;
 }
