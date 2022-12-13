@@ -1,8 +1,13 @@
+import { generateId } from '../../helper/generateId';
+
 const ADD_BOOK = 'book-store/books/ADD';
 const REMOVE_BOOK = 'book-store/books/REMOVE';
 
 const initialState = {
-  books: [],
+  books: [
+    { title: 'The Hunger Games', author: 'Suzanne Collins', id: generateId() },
+    { title: 'Dune', author: 'Frank Herbert', id: generateId() },
+  ],
 };
 
 export default function reducer(state = initialState, action) {
@@ -10,7 +15,7 @@ export default function reducer(state = initialState, action) {
     case ADD_BOOK:
       return {
         ...state,
-        books: [...state.books, action.payload],
+        books: [...state.books, { ...action.payload, id: generateId() }],
       };
     case REMOVE_BOOK:
       return {
