@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addBook } from '../../redux/books/books';
+import { addBook, addBookThunk } from '../../redux/books/books';
 import { Container, FormBase, Title, Input, SubmitButton } from './styles/form';
 
 export default function Form() {
-  const [book, setBook] = useState({ title: '', author: '' });
+  const [book, setBook] = useState({
+    title: '',
+    author: '',
+    category: 'Action',
+  });
+
   const dispatch = useDispatch();
 
-  const handleChange = (e) => {
+  const handleOnChange = (e) => {
     const { name, value } = e.target;
     setBook((prev) => {
       return {
@@ -19,6 +24,7 @@ export default function Form() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(addBookThunk(book));
     dispatch(addBook(book));
     setBook({ title: '', author: '' });
   };
@@ -28,13 +34,13 @@ export default function Form() {
       <Title>ADD NEW BOOK</Title>
       <FormBase>
         <Input
-          onChange={handleChange}
+          onChange={handleOnChange}
           name="title"
           placeholder="Book title"
           value={book.title}
         />
         <Input
-          onChange={handleChange}
+          onChange={handleOnChange}
           name="author"
           placeholder="Author"
           value={book.author}
