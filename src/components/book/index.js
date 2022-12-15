@@ -1,11 +1,12 @@
 import { useDispatch } from 'react-redux';
-import { removeBook } from '../../redux/books/books';
+import { removeBook, removeBookThunk } from '../../redux/books/books';
 import './styles/book.css';
 
 export default function Book({ title, author, id }) {
   const dispatch = useDispatch();
 
-  const handleRemove = () => {
+  const handleRemove = async () => {
+    dispatch(removeBookThunk(id));
     dispatch(removeBook(id));
   };
 
