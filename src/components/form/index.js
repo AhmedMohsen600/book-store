@@ -7,7 +7,6 @@ export default function Form() {
   const [book, setBook] = useState({
     title: '',
     author: '',
-    category: 'Action',
   });
 
   const dispatch = useDispatch();

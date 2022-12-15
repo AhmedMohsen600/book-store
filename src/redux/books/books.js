@@ -8,6 +8,7 @@ const REMOVE_BOOK = 'book-store/books/REMOVE';
 const GET_BOOKS = 'book-store/books/GET_BOOKS';
 const ADD_BOOK_THUNK = 'book-store/books/ADD_BOOK_THUNK';
 const REMOVE_BOOK_THUNK = 'book-store/books/REMOVE_BOOK_THUNK';
+
 const initialState = {
   books: [],
 };
@@ -22,7 +23,6 @@ export default function reducer(state = initialState, action) {
     case `${ADD_BOOK_THUNK}/fulfilled`:
       return {
         ...state,
-        books: [...state.books, { ...action.payload, id: generateId() }],
       };
     case ADD_BOOK:
       return {
@@ -48,6 +48,14 @@ export function addBook(book = {}) {
   return { type: ADD_BOOK, payload: book };
 }
 
+export const addBookThunk = createAsyncThunk(
+  ADD_BOOK_THUNK,
+  async (book = {}) => {
+    const bookObj = { item_id: generateId(), category: 'Action', ...book };
+    await postData(baseURL, bookObj);
+  }
+);
+
 export const fetchBooks = createAsyncThunk(GET_BOOKS, async () => {
   const formatedBooks = [];
   const data = await getData(baseURL);
@@ -55,10 +63,6 @@ export const fetchBooks = createAsyncThunk(GET_BOOKS, async () => {
     formatedBooks.push({ ...data[key][0], id: key });
   });
   return formatedBooks;
-});
-
-export const addBookThunk = createAsyncThunk(ADD_BOOK, async (book = {}) => {
-  await postData(baseURL, { ...book, item_id: generateId() });
 });
 
 export function removeBook(id) {
@@ -69,5 +73,6 @@ export const removeBookThunk = createAsyncThunk(
   REMOVE_BOOK_THUNK,
   async (id) => {
     await deleteBook(baseURL, id);
+    return id;
   }
 );
