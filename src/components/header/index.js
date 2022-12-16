@@ -1,5 +1,14 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Container, Group, Nav, TextLink, Logo } from './styles/header';
+import {
+  Container,
+  Group,
+  Nav,
+  TextLink,
+  Logo,
+  MaterialIcon,
+  IconButton,
+  Holder,
+} from './styles/header';
 import { links } from '../../fixtures/links';
 
 export default function Header() {
@@ -18,6 +27,11 @@ export default function Header() {
               </TextLink>
             ))}
           </Group>
+          <Holder>
+            <IconButton>
+              <MaterialIcon src="https://t3.ftcdn.net/jpg/05/17/79/88/360_F_517798849_WuXhHTpg2djTbfNf0FQAjzFEoluHpnct.jpg" />
+            </IconButton>
+          </Holder>
         </Nav>
       </Container>
       <Outlet />
