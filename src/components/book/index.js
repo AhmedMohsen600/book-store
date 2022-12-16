@@ -4,7 +4,6 @@ import './styles/book.css';
 
 export default function Book({ title, author, id }) {
   const dispatch = useDispatch();
-
   const handleRemove = () => {
     dispatch(removeBookThunk(id));
     dispatch(removeBook(id));

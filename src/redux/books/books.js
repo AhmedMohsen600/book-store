@@ -20,19 +20,10 @@ export default function reducer(state = initialState, action) {
         ...state,
         books: action.payload,
       };
-    case `${ADD_BOOK_THUNK}/fulfilled`:
-      return {
-        ...state,
-      };
     case ADD_BOOK:
       return {
         ...state,
         books: [...state.books, { ...action.payload, id: generateId() }],
-      };
-    case `${REMOVE_BOOK_THUNK}/fulfilled`:
-      return {
-        ...state,
-        books: state.books.filter((book) => book.id !== action.payload),
       };
     case REMOVE_BOOK:
       return {
@@ -73,6 +64,5 @@ export const removeBookThunk = createAsyncThunk(
   REMOVE_BOOK_THUNK,
   async (id) => {
     await deleteBook(baseURL, id);
-    return id;
   }
 );
