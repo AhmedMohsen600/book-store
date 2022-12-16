@@ -58,7 +58,11 @@ export const fetchBooks = createAsyncThunk(GET_BOOKS, async () => {
 });
 
 export const addBookThunk = createAsyncThunk(ADD_BOOK, async (book = {}) => {
-  await postData(baseURL, { ...book, item_id: generateId() });
+  await postData(baseURL, {
+    ...book,
+    item_id: generateId(),
+    category: 'Action',
+  });
 });
 
 export function removeBook(id) {
@@ -69,5 +73,6 @@ export const removeBookThunk = createAsyncThunk(
   REMOVE_BOOK_THUNK,
   async (id) => {
     await deleteBook(baseURL, id);
+    return id;
   }
 );
